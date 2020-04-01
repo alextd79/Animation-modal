@@ -3,7 +3,7 @@
 
 <head>
 	<style type="text/css">
-		#modal-container {
+		#revealing-modal-container {
 			position: fixed;
 			display: table;
 			height: 100%;
@@ -14,40 +14,40 @@
 			z-index: 1;
 		}
 
-		#modal-container.revealing-active {
+		#revealing-modal-container.revealing-active {
 			transform: scale(1);
 		}
 
-		#modal-container.revealing-active .modal-background {
+		#revealing-modal-container.revealing-active .revealing-modal-background {
 			background: rgba(0, 0, 0, .0);
 			animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		#modal-container.revealing-active .modal-background .modal {
+		#revealing-modal-container.revealing-active .revealing-modal-background .revealing-modal {
 			opacity: 0;
 			animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		#modal-container.revealing-active.out {
+		#revealing-modal-container.revealing-active.out {
 			animation: quickScaleDown 0s 0.5s linear forwards;
 		}
 
-		#modal-container.revealing-active.out .modal-background {
+		#revealing-modal-container.revealing-active.out .revealing-modal-background {
 			animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		#modal-container.revealing-active.out .modal-background .modal {
+		#revealing-modal-container.revealing-active.out .revealing-modal-background .revealing-modal {
 			animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		#modal-container .modal-background {
+		#revealing-modal-container .revealing-modal-background {
 			display: table-cell;
 			background: rgba(0, 0, 0, .8);
 			text-align: center;
 			vertical-align: middle;
 		}
 
-		#modal-container .modal-background .modal {
+		#revealing-modal-container .revealing-modal-background .revealing-modal {
 			background: white;
 			padding: 50px;
 			display: inline-block;
@@ -56,18 +56,18 @@
 			position: relative;
 		}
 
-		#modal-container .modal-background .modal h2 {
+		#revealing-modal-container .revealing-modal-background .revealing-modal h2 {
 			font-size: 25px;
 			line-height: 25px;
 			margin-bottom: 15px;
 		}
 
-		#modal-container .modal-background .modal p {
+		#revealing-modal-container .revealing-modal-background .revealing-modal p {
 			font-size: 18px;
 			line-height: 22px;
 		}
 
-		#modal-container .modal-background .modal .modal-svg {
+		#revealing-modal-container .revealing-modal-background .revealing-modal .modal-svg {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -76,7 +76,7 @@
 			border-radius: 3px;
 		}
 
-		#modal-container .modal-background .modal .modal-svg rect {
+		#revealing-modal-container .revealing-modal-background .revealing-modal .modal-svg rect {
 			stroke: #fff;
 			stroke-width: 2px;
 			stroke-dasharray: 778;
@@ -147,9 +147,9 @@
 
 <body class="dashboard">
 	<div class="app">
-		<div id="modal-container">
-			<div class="modal-background">
-				<div class="modal">
+		<div id="revealing-modal-container">
+			<div class="revealing-modal-background">
+				<div class="revealing-modal">
 					<h2>I'm a Modal</h2>
 					<p>Hear me roar.</p>
 					<svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
@@ -169,10 +169,10 @@
 </body>
 <script>
 	showModal = () => {
-		$('#modal-container').removeAttr('class').addClass("revealing-active");
+		$('#revealing-modal-container').removeAttr('class').addClass("revealing-active");
 	}
 
-	$('#modal-container').click(function () {
+	$('#revealing-modal-container').click(function () {
 		$(this).addClass('out');
 	});
 </script>
