@@ -33,7 +33,7 @@
 			animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		#modal-container.Revealing+.content {
+		.modal-start .content {
 			animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
@@ -49,7 +49,7 @@
 			animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		#modal-container.Revealing.out+.content {
+		.modal-inactive .content {
 			animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
@@ -96,13 +96,6 @@
 			stroke-dashoffset: 778;
 		}
 
-		.content {
-			min-height: 100%;
-			height: 100%;
-			background: white;
-			position: relative;
-			z-index: 0;
-		}
 
 		@keyframes fadeIn {
 			0% {
@@ -185,23 +178,25 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
-<body>
-	<div id="modal-container">
-		<div class="modal-background">
-			<div class="modal">
-				<h2>I'm a Modal</h2>
-				<p>Hear me roar.</p>
-				<svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-					preserveAspectRatio="none">
-					<rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
-				</svg>
+<body class="dashboard">
+	<div class="app">
+		<div id="modal-container">
+			<div class="modal-background">
+				<div class="modal">
+					<h2>I'm a Modal</h2>
+					<p>Hear me roar.</p>
+					<svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+						preserveAspectRatio="none">
+						<rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+					</svg>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="content">
-		<h1>Modal Animations</h1>
-		<div class="buttons">
-			<div id="Revealing" onclick="showModal();" class="button">Revealing</div>
+		<div class="content">
+			<h1>Modal Animations</h1>
+			<div class="buttons">
+				<div id="Revealing" onclick="showModal();" class="button">Revealing</div>
+			</div>
 		</div>
 	</div>
 </body>
@@ -209,11 +204,14 @@
 	showModal = () => {
 		$('#modal-container').removeAttr('class').addClass("Revealing");
 		$('body').addClass('modal-active');
+		$('body').addClass('modal-start');
+		$('body').removeClass('modal-inactive');
 	}
 
 	$('#modal-container').click(function () {
 		$(this).addClass('out');
 		$('body').removeClass('modal-active');
+		$('body').addClass('modal-inactive');
 	});
 </script>
 
