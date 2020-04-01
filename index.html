@@ -3,11 +3,6 @@
 
 <head>
 	<style type="text/css">
-		html.modal-active,
-		body.modal-active {
-			overflow: hidden;
-		}
-
 		#modal-container {
 			position: fixed;
 			display: table;
@@ -19,38 +14,30 @@
 			z-index: 1;
 		}
 
-		#modal-container.Revealing {
+		#modal-container.revealing-active {
 			transform: scale(1);
 		}
 
-		#modal-container.Revealing .modal-background {
+		#modal-container.revealing-active .modal-background {
 			background: rgba(0, 0, 0, .0);
 			animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		#modal-container.Revealing .modal-background .modal {
+		#modal-container.revealing-active .modal-background .modal {
 			opacity: 0;
 			animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		.modal-start .content {
-			animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-		}
-
-		#modal-container.Revealing.out {
+		#modal-container.revealing-active.out {
 			animation: quickScaleDown 0s 0.5s linear forwards;
 		}
 
-		#modal-container.Revealing.out .modal-background {
+		#modal-container.revealing-active.out .modal-background {
 			animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
-		#modal-container.Revealing.out .modal-background .modal {
+		#modal-container.revealing-active.out .modal-background .modal {
 			animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-		}
-
-		.modal-inactive .content {
-			animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		}
 
 		#modal-container .modal-background {
@@ -202,16 +189,11 @@
 </body>
 <script>
 	showModal = () => {
-		$('#modal-container').removeAttr('class').addClass("Revealing");
-		$('body').addClass('modal-active');
-		$('body').addClass('modal-start');
-		$('body').removeClass('modal-inactive');
+		$('#modal-container').removeAttr('class').addClass("revealing-active");
 	}
 
 	$('#modal-container').click(function () {
 		$(this).addClass('out');
-		$('body').removeClass('modal-active');
-		$('body').addClass('modal-inactive');
 	});
 </script>
 
