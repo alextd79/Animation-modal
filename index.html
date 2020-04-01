@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style type="text/css">
+		html.modal-active,
+		body.modal-active {
+			overflow: hidden;
+		}
+
+		#modal-container {
+			position: fixed;
+			display: table;
+			height: 100%;
+			width: 100%;
+			top: 0;
+			left: 0;
+			transform: scale(0);
+			z-index: 1;
+		}
+
+		#modal-container.Revealing {
+			transform: scale(1);
+		}
+
+		#modal-container.Revealing .modal-background {
+			background: rgba(0, 0, 0, .0);
+			animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		}
+
+		#modal-container.Revealing .modal-background .modal {
+			opacity: 0;
+			animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		}
+
+		#modal-container.Revealing+.content {
+			animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		}
+
+		#modal-container.Revealing.out {
+			animation: quickScaleDown 0s 0.5s linear forwards;
+		}
+
+		#modal-container.Revealing.out .modal-background {
+			animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		}
+
+		#modal-container.Revealing.out .modal-background .modal {
+			animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		}
+
+		#modal-container.Revealing.out+.content {
+			animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		}
+
+		#modal-container .modal-background {
+			display: table-cell;
+			background: rgba(0, 0, 0, .8);
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		#modal-container .modal-background .modal {
+			background: white;
+			padding: 50px;
+			display: inline-block;
+			border-radius: 3px;
+			font-weight: 300;
+			position: relative;
+		}
+
+		#modal-container .modal-background .modal h2 {
+			font-size: 25px;
+			line-height: 25px;
+			margin-bottom: 15px;
+		}
+
+		#modal-container .modal-background .modal p {
+			font-size: 18px;
+			line-height: 22px;
+		}
+
+		#modal-container .modal-background .modal .modal-svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			border-radius: 3px;
+		}
+
+		#modal-container .modal-background .modal .modal-svg rect {
+			stroke: #fff;
+			stroke-width: 2px;
+			stroke-dasharray: 778;
+			stroke-dashoffset: 778;
+		}
+
+		.content {
+			min-height: 100%;
+			height: 100%;
+			background: white;
+			position: relative;
+			z-index: 0;
+		}
+
+		@keyframes fadeIn {
+			0% {
+				background: rgba(0, 0, 0, .0);
+			}
+
+			100% {
+				background: rgba(0, 0, 0, .7);
+			}
+		}
+
+		@keyframes fadeOut {
+			0% {
+				background: rgba(0, 0, 0, .7);
+			}
+
+			100% {
+				background: rgba(0, 0, 0, .0);
+			}
+		}
+
+		@keyframes scaleUp {
+			0% {
+				transform: scale(0.8) translateY(1000px);
+				opacity: 0;
+			}
+
+			100% {
+				transform: scale(1) translateY(0px);
+				opacity: 1;
+			}
+		}
+
+		@keyframes scaleDown {
+			0% {
+				transform: scale(1) translateY(0px);
+				opacity: 1;
+			}
+
+			100% {
+				transform: scale(0.8) translateY(1000px);
+				opacity: 0;
+			}
+		}
+
+		@keyframes scaleBack {
+			0% {
+				transform: scale(1);
+			}
+
+			100% {
+				transform: scale(0.85);
+			}
+		}
+
+		@keyframes scaleForward {
+			0% {
+				transform: scale(0.85);
+			}
+
+			100% {
+				transform: scale(1);
+			}
+		}
+
+		@keyframes quickScaleDown {
+			0% {
+				transform: scale(1);
+			}
+
+			99.9% {
+				transform: scale(1);
+			}
+
+			100% {
+				transform: scale(0);
+			}
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div id="modal-container">
+		<div class="modal-background">
+			<div class="modal">
+				<h2>I'm a Modal</h2>
+				<p>Hear me roar.</p>
+				<svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+					preserveAspectRatio="none">
+					<rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<h1>Modal Animations</h1>
+		<div class="buttons">
+			<div id="Revealing" onclick="showModal();" class="button">Revealing</div>
+		</div>
+	</div>
+</body>
+<script>
+	showModal = () => {
+		$('#modal-container').removeAttr('class').addClass("Revealing");
+		$('body').addClass('modal-active');
+	}
+
+	$('#modal-container').click(function () {
+		$(this).addClass('out');
+		$('body').removeClass('modal-active');
+	});
+</script>
+
+</html>
